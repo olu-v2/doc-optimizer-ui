@@ -1,5 +1,5 @@
 import { JobProvider } from "./context/JobContext";
-import { FileDropzone } from "./components/FIleDropzone";
+import { FileDropzone } from "./components/FileDropzone";
 import { LevelSelector } from "./components/LevelSelector";
 import { UploadButton } from "./components/UploadButton";
 import { StatusTracker } from "./components/StatusTracker";
