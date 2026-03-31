@@ -10,7 +10,7 @@ const app = express();
 app.use(express.static(join(__dirname, "dist")));
 
 // SPA fallback — all routes return index.html
-app.get("*", (req, res) => {
+app.get("/*", (req, res) => {
   res.sendFile(join(__dirname, "dist", "index.html"));
 });
 
