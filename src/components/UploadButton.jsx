@@ -5,8 +5,6 @@ import {
   startProcessing,
 } from "../api/optimizer";
 import { getFriendlyError } from "../utils/errorMessages";
-import { hashFile } from "../utils/hashFile";
-import { submitHashToBlockchain } from "../api/optimizer";
 
 export const UploadButton = () => {
   const {
@@ -20,7 +18,7 @@ export const UploadButton = () => {
     setVerificationId,
   } = useJob();
 
-  const disabled = stage !== STAGES.IDLE || !file;
+  const disabled = stage !== STAGES.IDLE_SCANNED || !file;
 
   const handleUpload = async () => {
     try {
@@ -34,19 +32,6 @@ export const UploadButton = () => {
 
       // 2. Upload file directly to S3
       await uploadFileToS3(uploadUrl, file, setUploadProgress);
-
-      const documentHash = await hashFile(file);
-      const { data: blockchainData } = await submitHashToBlockchain(
-        file.name,
-        documentHash,
-        {
-          uploadedBy: "user",
-          documentType: file.type.includes("pdf") ? "pdf" : "docx",
-          description: `Original document - ${level} optimization`,
-          timestamp: new Date().toISOString(),
-        },
-      );
-      setVerificationId(blockchainData.data.verificationId);
 
       // 3. Trigger processing Lambda
       await startProcessing(key, level, jobId);

@@ -7,6 +7,7 @@ const blockchainClient = axios.create({
   baseURL: BLOCKCHAIN_BASE_URL,
   headers: {
     Authorization: `Bearer ${import.meta.env.VITE_BLOCKCHAIN_API_KEY}`,
+    "Content-Type": "application/json",
   },
 });
 

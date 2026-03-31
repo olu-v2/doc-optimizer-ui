@@ -4,10 +4,13 @@ import { LevelSelector } from "./components/LevelSelector";
 import { UploadButton } from "./components/UploadButton";
 import { StatusTracker } from "./components/StatusTracker";
 import { DownloadButton } from "./components/DownloadButton";
+import { ScanButton } from "./components/ScanButton";
+import { useScanPoller } from "./hooks/useScanPoller";
 import { useJobPoller } from "./hooks/useJobPoller";
 
 const AppInner = () => {
   useJobPoller();
+  useScanPoller();
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
@@ -22,6 +25,7 @@ const AppInner = () => {
         </div>
         <FileDropzone />
         <LevelSelector />
+        <ScanButton />
         <UploadButton />
         <StatusTracker />
         <DownloadButton />

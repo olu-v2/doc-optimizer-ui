@@ -4,6 +4,8 @@ const JobContext = createContext(null);
 
 export const STAGES = {
   IDLE: "IDLE",
+  SCANNING: "SCANNING",
+  IDLE_SCANNED: "IDLE_SCANNED",
   UPLOADING: "UPLOADING",
   PROCESSING: "PROCESSING",
   DONE: "DONE",
@@ -22,6 +24,9 @@ export const JobProvider = ({ children }) => {
   const [disabled, setDisabled] = useState(false);
   const [verificationId, setVerificationId] = useState(null);
   const [blockchainResult, setBlockchainResult] = useState(null);
+  const [verificationStatus, setVerificationStatus] = useState(null);
+  const [scanAnalysisId, setScanAnalysisId] = useState(null);
+  const [scanResult, setScanResult] = useState(null);
 
   const reset = () => {
     setDisabled(false);
@@ -34,6 +39,9 @@ export const JobProvider = ({ children }) => {
     setErrorMsg(null);
     setVerificationId(null);
     setBlockchainResult(null);
+    setVerificationStatus(null);
+    setScanAnalysisId(null);
+    setScanResult(null);
   };
 
   return (
@@ -60,6 +68,12 @@ export const JobProvider = ({ children }) => {
         setVerificationId,
         blockchainResult,
         setBlockchainResult,
+        verificationStatus,
+        setVerificationStatus,
+        scanAnalysisId,
+        setScanAnalysisId,
+        scanResult,
+        setScanResult,
       }}
     >
       {children}

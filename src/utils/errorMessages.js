@@ -9,6 +9,17 @@ const ERROR_MESSAGES = {
   FILE_NOT_READY: "Your file is not ready yet.",
 };
 
+export const getFriendlyProcessingError = (rawMessage) => {
+  if (!rawMessage) return "Processing failed. Please try again.";
+  if (rawMessage.toLowerCase().includes("extension"))
+    return "File type not supported by the processor.";
+  if (rawMessage.toLowerCase().includes("size"))
+    return "File is too large to process.";
+  if (rawMessage.toLowerCase().includes("timeout"))
+    return "Processing timed out. Please try again.";
+  return rawMessage; // show as-is for anything else
+};
+
 const FALLBACK = "Something went wrong. Please try again.";
 
 export const getFriendlyError = (err) => {
