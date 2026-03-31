@@ -19,7 +19,7 @@ const client = new LambdaClient({
 async function createLambda() {
   const roleArn = process.env.LAMBDA_ROLE_ARN;
 
-  const functionName = `preview-${process.env.LAMBDA_FUNCTION_NAME}-optimize`;
+  const functionName = `preview-${process.env.LAMBDA_FUNCTION_NAME}-optimize-fe`;
   const zipFile = fs.readFileSync("./function.zip");
 
   try {
