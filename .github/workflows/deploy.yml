@@ -11,29 +11,26 @@ permissions:
   pull-requests: write
 
 jobs:
-  # test:
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     JWT_SECRET: ${{ secrets.JWT_SECRET}}
-  #     DATABASE_URI: ${{ secrets.DATABASE_URI }}
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 1
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
-  #     - name: Set up Node.js
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 22
-  #         cache: "yarn"
-  #     - name: Install dependencies
-  #       run: yarn install --frozen-lockfile
-  #     - name: Run Jest tests
-  #       run: yarn test --coverage
-  #     - name: Delete Jest Coverage Folder
-  #       run: |
-  #         rm -rf coverage
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "yarn"
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Run Jest tests
+        run: yarn test --coverage
+      - name: Delete Jest Coverage Folder
+        run: |
+          rm -rf coverage
   deploy:
     runs-on: ubuntu-latest
     # needs: test
@@ -54,12 +51,12 @@ jobs:
         run: yarn install --frozen-lockfile
 
       # Run ESLint for static code analysis
-      # - name: Run ESLint
-      #   run: yarn lint
+      - name: Run ESLint
+        run: yarn lint
 
       # Fail the build if high-severity vulnerabilities exist
-      # - name: Security Audit
-      #   run: yarn audit --level high
+      - name: Security Audit
+        run: yarn audit --level high
 
       - name: Create .env file
         run: |
